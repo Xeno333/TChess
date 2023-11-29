@@ -8,6 +8,15 @@
 #define Forgound "\033[35m"
 #define BoardPadding " "
 
+namespace EasterEgg {
+    const std::string CopyRight = "All Rights Reserved\n\nCopyright (c) 2023 Xeno333\n\nTHE CONTENTS OF THIS PROJECT ARE PROPRIETARY AND CONFIDENTIAL.\nUNAUTHORIZED COPYING, TRANSFERRING OR REPRODUCTION OF THE CONTENTS OF THIS PROJECT, VIA ANY MEDIUM IS STRICTLY PROHIBITED.\n\nThe receipt or possession of the source code and/or any parts thereof does not convey or imply any right to use them\nfor any purpose other than the purpose for which they were provided to you.\n\nThe software is provided \"AS IS\", without warranty of any kind, express or implied, including but not limited to\nthe warranties of merchantability, fitness for a particular purpose and non infringement.\nIn no event shall the authors or copyright holders be liable for any claim, damages or other liability,\nwhether in an action of contract, tort or otherwise, arising from, out of or in connection with the software\nor the use or other dealings in the software.\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\n";
+
+    void EasterEgg() {
+        std::cout << "Congrats, you found an easteregg!" << std::endl << CopyRight;
+        std::cout << "Thanks for using tchess!" << std::endl;
+    }
+}
+
 using namespace std;
 
 class ChessBoard{
@@ -23,14 +32,14 @@ class ChessBoard{
 
         //Because the board table uses the reversed coords, only first
         map<char, unsigned char> posmap = {
-            {'a', 8},
-            {'b', 7},
-            {'c', 6},
-            {'d', 5},
-            {'e', 4},
-            {'f', 3},
-            {'g', 2},
-            {'h', 1},
+            {'h', 8},
+            {'g', 7},
+            {'f', 6},
+            {'e', 5},
+            {'d', 4},
+            {'c', 3},
+            {'b', 2},
+            {'a', 1},
             {'1', 8},
             {'2', 7},
             {'3', 6},
@@ -235,7 +244,23 @@ class ChessBoard{
                     break;
                 case 'R':
                     if ((src_collom == dst_collom) || (src_row == dst_row)) {
-                        if (Board[dst_row][dst_collom][0] != TurnOf) return 0;
+                        x1 = src_collom;
+                        y1 = src_row;
+                        while (((++x1 < 8)) && (Board[y1][x1] == "  ") && (x1 != dst_collom));
+                        if (((x1 < 8)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
+                        
+                        x1 = src_collom;
+                        while (((--x1 > -1)) && (Board[y1][x1] == "  ") && (x1 != dst_collom));
+                        if (((x1 > -1)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
+
+                        x1 = src_collom;
+                        y1 = src_row;
+                        while (((--y1 > -1)) && (Board[y1][x1] == "  ") && (y1 != dst_row));
+                        if (((y1 > -1)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
+
+                        y1 = src_row;
+                        while (((++y1 < 8)) && (Board[y1][x1] == "  ")  && (y1 != dst_row));
+                        if (((y1 < 8)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
                     }
                     break;
                 case 'K':
@@ -266,7 +291,23 @@ class ChessBoard{
                     break;
                 case 'Q':
                     if ((src_collom == dst_collom) || (src_row == dst_row)) {
-                        if (Board[dst_row][dst_collom][0] != TurnOf) return 0;
+                        x1 = src_collom;
+                        y1 = src_row;
+                        while (((++x1 < 8)) && (Board[y1][x1] == "  ") && (x1 != dst_collom));
+                        if (((x1 < 8)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
+                        
+                        x1 = src_collom;
+                        while (((--x1 > -1)) && (Board[y1][x1] == "  ") && (x1 != dst_collom));
+                        if (((x1 > -1)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
+
+                        x1 = src_collom;
+                        y1 = src_row;
+                        while (((--y1 > -1)) && (Board[y1][x1] == "  ") && (y1 != dst_row));
+                        if (((y1 > -1)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
+
+                        y1 = src_row;
+                        while (((++y1 < 8)) && (Board[y1][x1] == "  ")  && (y1 != dst_row));
+                        if (((y1 < 8)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
                     }
                     x1 = src_collom;
                     y1 = src_row;
@@ -326,12 +367,10 @@ class ChessBoard{
             Board[src_row][src_collom] = "  ";
 
             if (TurnOf == 'W') {
-                cout << endl << "Black's turn." << endl;
                 TurnOf = 'B';
             }
             else {
                 TurnOf = 'W';
-                cout << endl << "White's turn." << endl;
             }
 
             return 0;
@@ -401,7 +440,7 @@ class ChessBoard{
             cout << "  ";
             for (list<string>::iterator i = WhiteTook.begin(); i != WhiteTook.end(); i++)
                 cout << *i << " ";
-            cout << endl << BoardPadding << "  h" BoardPadding << " g" BoardPadding << " f" BoardPadding << " e" BoardPadding << " d" BoardPadding << " c" BoardPadding << " b" BoardPadding << " a" << endl;
+            cout << endl << BoardPadding << "  a" BoardPadding << " b" BoardPadding << " c" BoardPadding << " d" BoardPadding << " e" BoardPadding << " f" BoardPadding << " g" BoardPadding << " h" << endl;
         }
 
         void init() {
@@ -424,104 +463,70 @@ class ChessBoard{
 
 
 
-int main() {
-
+int play() {
     ChessBoard Game;
     Game.init();
-
-    Game.Play("b2", "b4");
     Game.PrintBoard();
 
-    Game.Play("d7", "d5");
-    Game.PrintBoard();
+    bool turn = true;//black is false
 
-    Game.Play("c1", "a3");
-    Game.PrintBoard();
+    string src, dst;
 
-    Game.Play("e8", "a4");
-    Game.PrintBoard();
+    while (true) {
+        cout << "Enter coords of peice you want to move: ";
+        cin >> src;
+        cout << "Enter coords of place you want to move to: ";
+        cin >> dst;
 
-    /*Game.Play("c7", "c5");
-    Game.PrintBoard();
-
-    Game.Play("b4", "c5");
-    Game.PrintBoard();
-
-    Game.Play("b7", "b6");
-    Game.PrintBoard();
-
-    Game.Play("c5", "b6");
-    Game.PrintBoard();*/
-
-    /*Game.Play("b2", "b4");
-    //Game.PrintBoard();
-
-    Game.Play("b7", "b6");
-    //Game.PrintBoard();
-
-    Game.Play("b4", "b5");
-    //Game.PrintBoard();
-
-    Game.Play("c7", "c6");
-    //Game.PrintBoard();
-
-    Game.Play("b5", "c6");
-    //Game.PrintBoard();
-
-    Game.Play("d7", "c6");
-   // Game.PrintBoard();
-
-    Game.Play("a2", "a4");
-    //Game.PrintBoard();
-
-    Game.Play("a7", "a5");
-    //Game.PrintBoard();
-
-    Game.Play("a1", "a3");
-    //Game.PrintBoard();
-
-    Game.Play("e7", "e5");
-    //Game.PrintBoard();
-
-    Game.Play("a3", "h3");
-    //Game.PrintBoard();
-
-    Game.Play("h7", "h6");
-    //Game.PrintBoard();
-
-    Game.Play("h3", "h6");
-    //Game.PrintBoard();
-
-    Game.Play("e8", "e7");
-    //Game.PrintBoard();
-
-
-
-    Game.Play("h2", "h4");
-    //Game.PrintBoard();
-
-    Game.Play("b8", "a6");
-    //Game.PrintBoard();
-
-    Game.Play("h4", "h5");
-    //Game.PrintBoard();
-
-    Game.Play("g7", "g5");
-    //Game.PrintBoard();
-
-    Game.Play("h5", "g6");
-    Game.PrintBoard();*/
-
-
-    /*
-    Game.Play("h6", "e6");
-    Game.PrintBoard();
-
-    if (Game.Play("e7", "e8") != 0) {
-        Game.Play("e7", "d7");
+        if ((src == "q") || (dst == "q")) {
+            cout << endl << "Game aborted!" << endl;
+            return -1;
+        }
+        if (Game.Play(src, dst) == 0) {
+            Game.PrintBoard();
+            if (turn == true) {
+                cout << "Black's turn" << endl;
+                turn = false;
+            }
+            else {
+                cout << "White's turn" << endl;
+                turn = true;
+            }
+        }
+        else {
+            cout << "Be real!" << endl;
+        }
     }
-    Game.PrintBoard();
-    */
+
+    return 0;
+}
+
+
+
+int main() {
+    string in;
+
+    while (true) {
+        cout << "Would you like to play a game?(y, n) " << endl;
+        cin >> in;
+
+        if (in == "y") {
+            play();
+        }
+        else if (in == "q") {
+            cout << "Bye" << endl;
+            break;
+        }
+        else if (in == "who") {
+            EasterEgg::EasterEgg();
+        }
+        else if (in == "help") {
+            cout << "q Quite" << endl << "y, n Play or not" << endl;
+        }
+        else if (in == "n") {
+            cout << "Loser!" << endl;
+        }
+    }
 
     return 0;
 }
