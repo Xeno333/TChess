@@ -272,22 +272,22 @@ class ChessBoard{
                     x1 = src_collom;
                     y1 = src_row;
                     while (((++y1 < 8) && (++x1 < 8)) && (Board[y1][x1] == "  ") && (x1 != dst_collom) && (y1 != dst_row));
-                    if (((y1 < 8) && (1 < 8)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
-                    
+                    if (((y1 < 8) && (x1 < 8)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
+
                     x1 = src_collom;
                     y1 = src_row;
                     while (((++y1 < 8) && (--x1 > -1)) && (Board[y1][x1] == "  ") && (x1 != dst_collom) && (y1 != dst_row));
-                    if (((y1 < 8) && (--x1 > -1)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
+                    if (((y1 < 8) && (x1 > -1)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
 
                     x1 = src_collom;
                     y1 = src_row;
                     while (((--y1 > -1) && (++x1 < 8)) && (Board[y1][x1] == "  ") && (x1 != dst_collom) && (y1 != dst_row));
-                    if (((y1 > -1) && (1 < 8)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
+                    if (((y1 > -1) && (x1 < 8)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
 
                     x1 = src_collom;
                     y1 = src_row;
                     while (((--y1 > -1) && (--x1 > -1)) && (Board[y1][x1] == "  ") && (x1 != dst_collom) && (y1 != dst_row));
-                    if (((y1 > -1) && (--x1 > -1)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
+                    if (((y1 > -1) && (x1 > -1)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
                     break;
                 case 'Q':
                     if ((src_collom == dst_collom) || (src_row == dst_row)) {
@@ -312,22 +312,22 @@ class ChessBoard{
                     x1 = src_collom;
                     y1 = src_row;
                     while (((++y1 < 8) && (++x1 < 8)) && (Board[y1][x1] == "  ") && (x1 != dst_collom) && (y1 != dst_row));
-                    if (((y1 < 8) && (1 < 8)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
+                    if (((y1 < 8) && (x1 < 8)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
                     
                     x1 = src_collom;
                     y1 = src_row;
                     while (((++y1 < 8) && (--x1 > -1)) && (Board[y1][x1] == "  ") && (x1 != dst_collom) && (y1 != dst_row));
-                    if (((y1 < 8) && (--x1 > -1)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
+                    if (((y1 < 8) && (x1 > -1)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
 
                     x1 = src_collom;
                     y1 = src_row;
                     while (((--y1 > -1) && (++x1 < 8)) && (Board[y1][x1] == "  ") && (x1 != dst_collom) && (y1 != dst_row));
-                    if (((y1 > -1) && (1 < 8)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
+                    if (((y1 > -1) && (x1 < 8)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
 
                     x1 = src_collom;
                     y1 = src_row;
                     while (((--y1 > -1) && (--x1 > -1)) && (Board[y1][x1] == "  ") && (x1 != dst_collom) && (y1 != dst_row));
-                    if (((y1 > -1) && (--x1 > -1)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
+                    if (((y1 > -1) && (x1 > -1)) && (x1 == dst_collom) && (y1 == dst_row) && (Board[y1][x1][0] != TurnOf)) return 0;
                     break;
                 default:
                     break;
@@ -360,7 +360,7 @@ class ChessBoard{
                 Board[LastDstRow][LastDstCollom] = "  ";
                 Take(Board[LastDstRow][LastDstCollom]);
             }
-            else if (Board[dst_row][dst_collom] == "  ") {
+            else if (Board[dst_row][dst_collom] != "  ") {
                 Take(Board[dst_row][dst_collom]);
             }
             Board[dst_row][dst_collom] = Board[src_row][src_collom];
